@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="ion-padding">
+    <form #registerForm="ngForm">
+    <ion-grid>
+      <ion-row >
+        <ion-col size="12">
+          <ion-item>
+            <ion-label ><span style=" color: blue;">User Name:</span> {{username}}</ion-label>
+         
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="Sname!='null'">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label ><span style=" color: blue;">Student Name:</span> {{Sname}}</ion-label>
+          
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="Sclass!='null'">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label ><span style=" color: blue;">Class:</span> {{Sclass}}</ion-label>
+ 
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="roll_num!='null'">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label ><span style=" color: blue;">Roll Number:</span> {{roll_num}}</ion-label>
+
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="Section!='null'">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label ><span style=" color: blue;">Section:</span> {{Section}}</ion-label>
+          
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" style=" color: blue;">Email ID</ion-label>
+         
+              <ion-input 
+              class="input"
+              name="email" 
+              ngModel 
+              #uemail="ngModel" 
+              [(ngModel)] = email 
+              required 
+              placeholder="Enter email" 
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" *ngIf="uemail.touched && !uemail.valid">
+              <ion-text color="danger">
+                <p>Please enter email</p>
+              </ion-text>
+              
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" style=" color: blue;">Mobile Number</ion-label>
+        
+              <ion-input 
+              class="input"
+              name="mobile" 
+              ngModel 
+              #umobile="ngModel" 
+              [(ngModel)] = mobile 
+              required 
+              placeholder="Enter mobile number" 
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" *ngIf="umobile.touched && !umobile.valid">
+              <ion-text color="danger">
+                <p>Please enter mobile number</p>
+              </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" style=" color: blue;">New Password</ion-label>
+          
+              <ion-input 
+              class="input"
+              name="password" 
+              ngModel 
+              #upass="ngModel" 
+              [(ngModel)] = password 
+              required 
+              placeholder="Enter new password" 
+              type="password"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" *ngIf="upass.touched && !upass.valid">
+              <ion-text color="danger">
+                <p>Please enter new password</p>
+              </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" style=" color: blue;">Re Enter New Password</ion-label>
+         
+              <ion-input 
+              class="input"
+              name="repassword" 
+              ngModel 
+              #uerpass="ngModel" 
+              [(ngModel)] = repassword 
+              required 
+              placeholder="Re Enter New Username" 
+              type="password"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" *ngIf="uerpass.touched && !uerpass.valid">
+              <ion-text color="danger">
+                <p>Please re enter new password</p>
+              </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="block" color="primary" [disabled]="!registerForm.valid" (click)="editProfile()"> Submit </ion-button>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+  </form>
+  </div>
+  </ion-content>

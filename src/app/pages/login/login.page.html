@@ -1,0 +1,80 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-title>IIT-B Kendriya Vidyalaya</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <div >
+<ion-card style="margin-top:25%;background-color:lightgrey">
+
+  	
+  
+  <div class="ion-padding">
+    <div id="banner_wrapper">	
+      <div class="container">					
+        <div id="banner">
+          <a href="#"><img src="/assets/images/banner.jpg"  alt="banner image" title="Image Source : http://scoilphadraignscorduff.scoilnet.ie/blog/files/2010/11/Parent-TeacherConference1.jpg"/></a>
+        </div>	
+      </div>	
+    </div>
+    <h1>IIT-B KV School Parents-Teachers Discussion Forum</h1>
+    <form #loginForm="ngForm">
+    <ion-grid>
+      <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Login ID</ion-label>
+          
+              <ion-input 
+              class="input"
+              name="loginid" 
+              ngModel 
+              #uid="ngModel" 
+              [(ngModel)] = loginid 
+              required 
+              placeholder="Enter Login ID" 
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" *ngIf="uid.touched && !uid.valid">
+              <ion-text color="danger">
+                <p>Please enter Login ID</p>
+              </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating"> Password</ion-label>
+          
+       
+              <ion-input 
+              class="input"
+              name="password" 
+              ngModel 
+              #upass="ngModel" 
+              [(ngModel)] = password 
+              required 
+              placeholder="Enter password" 
+              type="password"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" *ngIf="upass.touched && !upass.valid">
+              <ion-text color="danger">
+                <p>Please enter password</p>
+              </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="block" color="primary" [disabled]="!loginForm.valid" (click)="signIn()"> Log In </ion-button>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+  </form>
+  </div>
+</ion-card>
+</div>
+  </ion-content>

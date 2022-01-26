@@ -1,0 +1,219 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Post Discussions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+       
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" style=" color: blue;">Select Category(*):</ion-label>
+          <ion-select [(ngModel)]="category" interface="popover" okText="Okay" cancelText="Dismiss">
+              <ion-select-option *ngFor="let item of ddCategories;let i=index" value="{{item}}">{{i+1}}.{{item}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+    
+        <ion-col size="12">
+          <ion-item >
+            <ion-label position="floating" style=" color: blue;">Subject(*):</ion-label>
+            <ion-input  placeholder="Subject" [(ngModel)]="subject" required></ion-input>
+          </ion-item>
+         
+        </ion-col>
+      </ion-row>
+      <ion-row>
+      
+        <ion-col size="12">
+          <ion-item >
+            <ion-label position="floating" style=" color: blue;"> Description(*):</ion-label>
+            <ion-textarea placeholder="Description"  [(ngModel)]="discussion" required style="height:120px; width:100%; border:1px solid gray" ></ion-textarea>
+          </ion-item>
+        
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="3<2">
+       
+        <ion-col size="12">
+          <ion-label  style=" color: blue;">Attach files:</ion-label>
+          <ion-item>
+           
+            
+              <ion-icon lazy="true" slot="start" name="file"></ion-icon>
+              
+              <ion-input type="file" (change)="loadFromDevice($event)" id="file-input"
+                accept="*" ></ion-input>
+            
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+      
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Post Visibility:</ion-label>
+          <ion-select [(ngModel)]="visibility" interface="popover" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let visibility of ddPostVisibility;let i=index"  value="{{i+1}}">{{visibility}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item *ngIf="access_level==0">
+      <ion-row *ngIf="visibility==2">
+      <ion-col size="12">
+        <ion-item>
+        <ion-label position="floating" style=" color: blue;">Select teacher(s)/SR :*</ion-label>
+        <ion-select multiple="true" [(ngModel)]="teachers" interface="alert" okText="Okay" cancelText="Dismiss" >
+          <ion-select-option *ngFor="let teacher of UIData['teachers'];let i=index"  value="{{teacher[0]}}">{{teacher[1]}}</ion-select-option>
+        </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+      
+    <ion-row *ngIf="visibility==4">
+      <ion-col size="12">
+        <ion-item>
+        <ion-label position="floating" style=" color: blue;">Select section(s) :*</ion-label>
+        <ion-select multiple="true" [(ngModel)]="sections" interface="alert" okText="Okay" cancelText="Dismiss" >
+          <ion-select-option *ngFor="let sec of UIData['sections'];let i=index"  value="{{sec}}">{{sec}}</ion-select-option>
+        </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+    <ion-item *ngIf="access_level>=1">
+
+      <ion-row *ngIf="visibility==2">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select division(s) :*</ion-label>
+          <ion-select multiple="true" [(ngModel)]="division" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let d of UIData['divisions'];let i=index"  value="{{d}}">{{d}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="visibility==3">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select Class(es) :*</ion-label>
+          <ion-select multiple="true" [(ngModel)]="classes" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let cls of UIData['classes'];let i=index"  value="{{cls}}">{{cls}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="visibility==4">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select Class:*</ion-label>
+          <ion-select  [(ngModel)]="classes" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let clsS of UIData['clSection'];let i=index"  value="{{clsS[0]}}">{{clsS[0]}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+
+      <ion-row *ngIf="visibility==4 && clsses!=''">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select Section :*</ion-label>
+          <ion-select [(ngModel)]="sections" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let clsec of UIData['clSection'][classes-1][1];let i=index"  value="{{clsec}}">{{clsec}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+
+      <ion-row *ngIf="visibility==5">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select teacher(s) :*</ion-label>
+          <ion-select multiple="true" [(ngModel)]="teachers" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let teacher of UIData['teachers'];let i=index"  value="{{teacher[0]}}">{{teacher[1]}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      
+      <ion-row *ngIf="visibility==7">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select Class:*</ion-label>
+          <ion-select  [(ngModel)]="classes" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let clsS of UIData['clSection'];let i=index"  value="{{clsS[0]}}">{{clsS[0]}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+
+      <ion-row *ngIf="visibility==7 && clsses!=''">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select Section :*</ion-label>
+          <ion-select  [(ngModel)]="sections" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let clsec of UIData['clSection'][classes-1][1];let i=index"  value="{{clsec}}">{{clsec}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+
+      <ion-row *ngIf="visibility==8">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select Class :*</ion-label>
+          <ion-select [(ngModel)]="classes" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let cl of UIData['cl'];let i=index"  value="{{cl}}">{{cl}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="visibility==9">
+        <ion-col size="12">
+          <ion-item>
+          <ion-label position="floating" style=" color: blue;">Select division:*</ion-label>
+          <ion-select [(ngModel)]="division" interface="alert" okText="Okay" cancelText="Dismiss" >
+            <ion-select-option *ngFor="let d of UIData['divisions'];let i=index"  value="{{d}}">{{d}}</ion-select-option>
+          </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-item>
+      <ion-row>
+        <ion-col size="1"></ion-col>
+        <ion-col size="1">
+          <ion-checkbox  [(ngModel)]="smsCheck" unchecked></ion-checkbox>
+        </ion-col>
+        
+        <ion-col size="3">Send SMS</ion-col>
+        <ion-col size="3"></ion-col>
+        <ion-col size="4">
+          <ion-button (click)="postDiscussion()">Send</ion-button>
+        </ion-col>
+      </ion-row>
+     
+    </ion-grid>
+    
+  </ion-card>
+
+</ion-content>

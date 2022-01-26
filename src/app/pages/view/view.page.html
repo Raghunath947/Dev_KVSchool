@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>View Discussions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+  <ion-item>
+    <ion-label position="floating" style=" color: blue;">Select Type</ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="getDetails()" okText="Okay" cancelText="Dismiss" interface="popover">
+      <ion-select-option value="1">All</ion-select-option>
+      <ion-select-option value="2">Public posts</ion-select-option>
+      <ion-select-option value="3">Initiated by me</ion-select-option>
+      <ion-select-option value="4">Marked to me</ion-select-option>
+      <ion-select-option value="5">Corporal Punishment</ion-select-option>
+      <ion-select-option value="6">Marked to my class/sections</ion-select-option>
+      <ion-select-option value="7">By other parents</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-card>
+
+<div *ngIf="viewData!=null">
+  <ion-list  *ngFor="let p of searchItem " style="padding:0.5%;">
+    
+      <ion-card style="padding: 1%;color: blue;margin:1%;background-color: lightgrey;">
+  
+      <p>
+        <ion-label><b style="color:purple">Category:</b> {{ p.category }}</ion-label>
+      </p>
+      <p>
+        <ion-label><b style="color:purple">Subject:</b> {{ p.subject }}</ion-label>
+      </p>
+      <p>
+        <ion-label><b style="color:purple">Topic:</b> {{ p.topic }}</ion-label>
+      </p>
+      <p *ngIf="p.access_level">
+        <ion-label><b style="color:purple">Access Level:</b> {{ p.access_level }}</ion-label>
+      </p>
+      <p>
+        <ion-label><b style="color:purple">Posted by:</b> {{ p.name }}</ion-label>
+      </p>
+      <p>
+        <ion-label><b style="color:purple">Date:</b> {{ p.timestamp }}</ion-label>
+      </p>
+      </ion-card>
+    
+    
+  
+  </ion-list>
+  </div>  
+
+
+ 
+</ion-content>
